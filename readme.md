@@ -1,25 +1,41 @@
-## Laravel PHP Framework
+# Install Guidelines
+Please ensure that you are using PHP version 5.5 and above. (Not tested on lower versions)
+# Install Laravel
+1. Open console and cd into the qrlogin-laravel folder.
+2. Run 'composer install' to install all laravel and then 'php artisan key:generate'.
+3. Create a new mysql database with the name 'qrlogin'.
+4. From the qrlogin-laravel folder console, run 'php artisan migrate:install' and then 'php artisan migrate'
+# Method 1. Using Virtual Local Domains
+1. If you are using windows goto 'C:\wamp
+\bin\apache\apache2.4.9\conf' and open the 'httpd.conf' file.
+2. At the end of the file copy and paste the content below:
+```
+NameVirtualHost  127.0.0.1
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+&lt;VirtualHost  127.0.0.1&gt;
+    ServerName  local.qrlogin.com
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+    DocumentRoot "C:/wamp/www/qrlogin-laravel/public"
+    &lt;Directory C:/wamp/www/qrlogin-laravel/public&gt;
+        Order Allow,Deny
+        Allow from all
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+```
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+3. Goto 'C:\Windows\System32\Drivers\etc' and open the 'hosts' file.
+4. Copy and paste the content below
+```
+127.0.0.1        local.qrlogin.com
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+```
+5. Restart Apache and goto  http://local.qrlogin.com on your browser.
+# Method 2. Using localhost
+1. Goto '/path/to/qrlogin-laravel/app/config/' and open 'app.php'.
+2. On line '29' change 'url' to 'http://localhost'
+```
+'url' =&gt; 'http://localhost',
+```
 
-## Official Documentation
-
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
-
-### Contributing To Laravel
-
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+3. Navigate your browser to 'http://localhost/qrlogin-laravel/public'
+Happy Hacking ;)
